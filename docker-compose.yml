@@ -1,0 +1,82 @@
+version: '3.8'
+
+services:
+  # MySQL Database
+  mysql:
+    image: mysql:8.0
+    container_name: ecommerce_mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASS}
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./database/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+    networks:
+      - ecommerce_network
+
+  # Backend API
+  backend:
+    build: ./backend
+    container_name: ecommerce_backend
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      DB_HOST: mysql
+      DB_USER: ${DB_USER}
+      DB_PASS: ${DB_PASS}
+      DB_NAME: ${DB_NAME}
+      PORT: 5000
+      JWT_SECRET: ${JWT_SECRET}
+      CHAPA_SECRET_KEY: ${CHAPA_SECRET_KEY}
+      FRONTEND_URL: ${FRONTEND_URL}
+    ports:
+      - "5000:5000"
+    depends_on:
+      - mysql
+    volumes:
+      - ./backend/uploads:/app/uploads
+    networks:
+      - ecommerce_network
+
+  # Frontend
+  frontend:
+    build: ./frontend
+    container_name: ecommerce_frontend
+    restart: unless-stopped
+    environment:
+      REACT_APP_API_URL: ${REACT_APP_API_URL}
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    networks:
+      - ecommerce_network
+
+  # Nginx Reverse Proxy (Optional)
+  nginx:
+    image: nginx:alpine
+    container_name: ecommerce_nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/ssl:/etc/nginx/ssl
+    depends_on:
+      - frontend
+      - backend
+    networks:
+      - ecommerce_network
+
+volumes:
+  mysql_data:
+
+networks:
+  ecommerce_network:
+    driver: bridge
