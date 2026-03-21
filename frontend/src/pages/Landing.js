@@ -191,7 +191,8 @@ function CategoriesSection({ darkMode }) {
       
       // Get product counts for each category
       const counts = {};
-      for (const cat of r.data) {
+      const categoriesArray = Array.isArray(r.data) ? r.data : [];
+      for (const cat of categoriesArray) {
         try {
           const productsRes = await axios.get(`${API}/products?category=${cat.slug}`);
           const products = productsRes.data.products || productsRes.data || [];
@@ -218,7 +219,7 @@ function CategoriesSection({ darkMode }) {
     'beauty': 'https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=400&q=80',
   };
 
-  const parentCats = categories.filter(c => !c.parent_id).slice(0, 4);
+  const parentCats = (Array.isArray(categories) ? categories : []).filter(c => !c.parent_id).slice(0, 4);
   
   // Debug: Log category slugs to see what they actually are
   console.log('🔍 Category slugs:', parentCats.map(cat => ({ name: cat.name, slug: cat.slug })));
