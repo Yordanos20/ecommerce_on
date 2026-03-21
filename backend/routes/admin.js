@@ -8,6 +8,7 @@ const roleCheck = require("../config/middleware/role");
 const {
   adminLogin,
   getDashboardStats,
+  getNotifications,
   getAllUsers,
   updateUserStatus,
   deleteUser,
@@ -37,6 +38,7 @@ router.post("/login", adminLogin);
 // Dashboard
 // ===============================
 router.get("/dashboard", auth, roleCheck(["Admin"]), getDashboardStats);
+router.get("/notifications", auth, roleCheck(["Admin"]), getNotifications);
 
 // ===============================
 // Users Management

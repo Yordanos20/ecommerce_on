@@ -9,6 +9,10 @@ const {
   updateProfile,
   getMe,
   updatePassword,
+  testUser,
+  createSeller,
+  bypassLogin,
+  minimalTest,
 } = require("../controllers/authControllers");
 const auth = require("../config/middleware/auth");
 
@@ -17,6 +21,18 @@ router.post("/register", register);
 
 // Login a user
 router.post("/login", login);
+
+// Test user existence
+router.post("/test", testUser);
+
+// Create seller user
+router.post("/create-seller", createSeller);
+
+// Bypass login for testing
+router.post("/bypass-login", bypassLogin);
+
+// Minimal test - bypass everything
+router.post("/minimal-test", minimalTest);
 
 // Update user profile (requires auth)
 router.put("/:id", auth, updateProfile);

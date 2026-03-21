@@ -131,6 +131,8 @@ exports.getProducts = async (req, res) => {
 // GET single product
 exports.getProductById = async (req, res) => {
   try {
+    console.log(`🔍 Looking for product with ID: ${req.params.id}`);
+    
     const products = await query(
       `SELECT p.*, c.name AS category
        FROM products p
@@ -139,12 +141,21 @@ exports.getProductById = async (req, res) => {
       [req.params.id]
     );
 
+    console.log(`📊 Query result:`, products.length, 'products found');
+    console.log(`📋 Products data:`, products);
+
     if (products.length === 0) {
-      return res.status(404).json({ error: "Product not found" });
+      console.log(`❌ Product not found for ID: ${req.params.id}`);
+      return res.status(404).json({ 
+        error: "Product not found",
+        message: `No product exists with ID: ${req.params.id}`,
+        searchedId: req.params.id
+      });
     }
 
     const product = products[0];
-
+    console.log(`✅ Found product:`, product.id, product.name);
+    
     product.specifications = safeJson(product.specifications, {});
     product.colors = safeJson(product.colors, []);
     product.sizes = safeJson(product.sizes, []);
@@ -154,6 +165,7 @@ exports.getProductById = async (req, res) => {
 
     res.json(product);
   } catch (err) {
+    console.error(`💥 Database error fetching product ${req.params.id}:`, err);
     res.status(500).json({ error: err.message });
   }
 };
