@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const BASE_URL = "/api";
+export const BASE_URL = "https://ecommerce-backend-ol0h.onrender.com/api";
 
 const api = axios.create({
   baseURL: BASE_URL,
