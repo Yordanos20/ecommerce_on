@@ -8,7 +8,7 @@ const app = express();
 
 // ================= MIDDLEWARE =================
 app.use(cors({
-  origin: ["https://ecommerceyo.netlify.app", "http://localhost:3000"],
+  origin: ["https://ecommerceyo.netlify.app", "https://myecommerce-liart.vercel.app", "http://localhost:3000"],
   credentials: true
 }));
 app.use(express.json({ limit: '10mb' }));
