@@ -2,7 +2,7 @@
 import { createContext, useState, useEffect } from "react";
 import axios from "axios";
 
-const API_BASE = "/api";
+const API_BASE = "https://ecommerce-backend-ol0h.onrender.com/api";
 
 export const AuthContext = createContext();
 
