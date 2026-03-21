@@ -31,6 +31,14 @@ export default function CustomerDashboardSimple({ darkMode, setDarkMode }) {
       setDashboardData(response.data);
     } catch (error) {
       console.error("Error fetching dashboard data:", error);
+      // Set empty state instead of mock data
+      setDashboardData({
+        stats: { total_orders: 0, total_spent: 0, pending_orders: 0, completed_orders: 0 },
+        orders: [],
+        addresses: [],
+        notifications: [],
+        wishlistItems: []
+      });
     } finally {
       setLoading(false);
     }
