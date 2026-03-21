@@ -11,7 +11,7 @@ import { SimpleWishlistContext } from "../context/SimpleWishlistContext";
 import { WishlistContext } from "../context/WishlistContext";
 import Footer from "../components/Footer";
 
-const API = "/api";
+const API = "https://ecommerce-backend-ol0h.onrender.com/api";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
