@@ -42,10 +42,16 @@ export default function Products({ darkMode }) {
   };
 
   useEffect(() => {
+    console.log('🏠 Products page - fetching products');
     fetch("https://ecommerce-backend-ol0h.onrender.com/api/products")
-      .then((res) => res.json())
+      .then((res) => {
+        console.log('🏠 Products API response status:', res.status);
+        return res.json();
+      })
       .then((data) => {
+        console.log('🏠 Products API data:', data);
         const allProducts = Array.isArray(data) ? data : (data.products || []);
+        console.log('🏠 Products parsed:', allProducts.length);
         setProducts(allProducts);
         setLoading(false);
 
@@ -58,7 +64,8 @@ export default function Products({ darkMode }) {
         // Apply initial filters
         applyFilters(allProducts, initialCategory, initialSearch);
       })
-      .catch(() => {
+      .catch((error) => {
+        console.error('🏠 Products fetch error:', error);
         // Fallback products if API fails
         const fallbackProducts = [
           { id: 1, name: "Laptop Pro", price: "1299.99", image: "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=400", rating: 4.5, category: "Electronics" },
@@ -72,7 +79,7 @@ export default function Products({ darkMode }) {
         setLoading(false);
         toast.warning('Using sample products - API connection issue');
       });
-  }, [categoryParam, searchParam]);
+  }, []); // Remove dependencies to prevent re-fetch loops
 
   const applyFilters = (productsToFilter = products, category = selectedCategory, search = searchQuery) => {
     let filtered = [...productsToFilter];
