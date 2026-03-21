@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Wishlist Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .test-section { margin: 20px 0; padding: 20px; border: 1px solid #ccc; }
+        .result { margin: 10px 0; padding: 10px; }
+        .success { color: green; }
+        .error { color: red; }
+        button { padding: 10px 20px; margin: 5px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h1>🛍️ Wishlist Functionality Test</h1>
+    
+    <div class="test-section">
+        <h3>Step 1: Test Login</h3>
+        <button onclick="testLogin()">Test Customer Login</button>
+        <div id="loginResult" class="result"></div>
+    </div>
+    
+    <div class="test-section">
+        <h3>Step 2: Test Wishlist Add</h3>
+        <input type="text" id="productId" placeholder="Product ID (try 1)" value="1">
+        <button onclick="testAddWishlist()">Add to Wishlist</button>
+        <div id="addResult" class="result"></div>
+    </div>
+    
+    <div class="test-section">
+        <h3>Step 3: Test Wishlist Get</h3>
+        <button onclick="testGetWishlist()">Get Wishlist</button>
+        <div id="getResult" class="result"></div>
+    </div>
+
+    <script>
+        let authToken = '';
+        
+        async function testLogin() {
+            try {
+                const response = await fetch('http://localhost:5000/api/users/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        email: 'john.smith@email.com',
+                        password: 'password123'
+                    })
+                });
+                
+                const data = await response.json();
+                if (data.token) {
+                    authToken = data.token;
+                    document.getElementById('loginResult').innerHTML = '<span class="success">✅ Login successful! Token saved.</span>';
+                } else {
+                    document.getElementById('loginResult').innerHTML = '<span class="error">❌ Login failed!</span>';
+                }
+            } catch (error) {
+                document.getElementById('loginResult').innerHTML = '<span class="error">❌ Login error: ' + error.message + '</span>';
+            }
+        }
+        
+        async function testAddWishlist() {
+            if (!authToken) {
+                document.getElementById('addResult').innerHTML = '<span class="error">❌ Please login first!</span>';
+                return;
+            }
+            
+            try {
+                const productId = document.getElementById('productId').value;
+                const response = await fetch(`http://localhost:5000/api/wishlist/${productId}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${authToken}`
+                    }
+                });
+                
+                const data = await response.json();
+                document.getElementById('addResult').innerHTML = 
+                    '<span class="success">✅ Add response: ' + JSON.stringify(data) + '</span>';
+            } catch (error) {
+                document.getElementById('addResult').innerHTML = 
+                    '<span class="error">❌ Add error: ' + error.message + '</span>';
+            }
+        }
+        
+        async function testGetWishlist() {
+            if (!authToken) {
+                document.getElementById('getResult').innerHTML = '<span class="error">❌ Please login first!</span>';
+                return;
+            }
+            
+            try {
+                const response = await fetch('http://localhost:5000/api/wishlist', {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${authToken}`
+                    }
+                });
+                
+                const data = await response.json();
+                document.getElementById('getResult').innerHTML = 
+                    '<span class="success">✅ Wishlist: ' + JSON.stringify(data) + '</span>';
+            } catch (error) {
+                document.getElementById('getResult').innerHTML = 
+                    '<span class="error">❌ Get error: ' + error.message + '</span>';
+            }
+        }
+    </script>
+</body>
+</html>
