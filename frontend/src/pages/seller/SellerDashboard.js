@@ -92,7 +92,7 @@ function SellerDashboard({ darkMode }) {
       const revenue = revenueData.status === 'fulfilled' ? revenueData.value : [];
       const topProducts = topProductsData.status === 'fulfilled' ? topProductsData.value : [];
       const lowStock = lowStockData.status === 'fulfilled' ? lowStockData.value : [];
-      const reviews = reviewsData.status === 'fulfilled' ? reviewsData.value : { reviews: [] };
+      const reviews = reviewsResponse.status === 'fulfilled' ? reviewsResponse.value : { reviews: [] };
 
       // Calculate additional stats
       const thisMonthRevenue = revenue?.[revenue.length - 1]?.revenue || 0;
