@@ -66,18 +66,10 @@ export default function Products({ darkMode }) {
       })
       .catch((error) => {
         console.error('🏠 Products fetch error:', error);
-        // Fallback products if API fails
-        const fallbackProducts = [
-          { id: 1, name: "Laptop Pro", price: "1299.99", image: "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=400", rating: 4.5, category: "Electronics" },
-          { id: 2, name: "Wireless Headphones", price: "199.99", image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400", rating: 4.2, category: "Electronics" },
-          { id: 3, name: "Smart Watch", price: "299.99", image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400", rating: 4.0, category: "Electronics" },
-          { id: 4, name: "Running Shoes", price: "89.99", image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400", rating: 4.3, category: "Sports" },
-          { id: 5, name: "Coffee Maker", price: "149.99", image: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=400", rating: 4.1, category: "Home" }
-        ];
-        setProducts(fallbackProducts);
-        setFilteredProducts(fallbackProducts);
+        setProducts([]);
+        setFilteredProducts([]);
         setLoading(false);
-        toast.warning('Using sample products - API connection issue');
+        toast.error('Failed to load products - please refresh');
       });
   }, []); // Remove dependencies to prevent re-fetch loops
 

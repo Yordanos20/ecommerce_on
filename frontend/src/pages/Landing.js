@@ -587,16 +587,8 @@ export default function Landing({ darkMode, setDarkMode }) {
       })
       .catch(err => {
         console.error('🏠 Error fetching products:', err);
-        // Fallback to sample products if API fails
-        const fallbackProducts = [
-          { id: 1, name: "Laptop Pro", price: "1299.99", image: "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=400", rating: 4.5 },
-          { id: 2, name: "Wireless Headphones", price: "199.99", image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400", rating: 4.2 },
-          { id: 3, name: "Smart Watch", price: "299.99", image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400", rating: 4.0 },
-          { id: 4, name: "Running Shoes", price: "89.99", image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400", rating: 4.3 },
-          { id: 5, name: "Coffee Maker", price: "149.99", image: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=400", rating: 4.1 }
-        ];
-        setProducts(fallbackProducts);
-        toast.warning('Using sample products - API connection issue');
+        setProducts([]);
+        toast.error('Failed to load products - please refresh');
       })
       .finally(() => setLoading(false));
   }, []);
