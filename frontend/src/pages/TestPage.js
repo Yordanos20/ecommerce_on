@@ -8,7 +8,7 @@ export default function TestPage() {
 
   useEffect(() => {
     // Test API connection
-    fetch("http://localhost:5000/api/products")
+    fetch("https://ecommerce-backend-ol0h.onrender.com/api/products")
       .then(res => {
         setApiStatus(`API Status: ${res.status}`);
         return res.json();

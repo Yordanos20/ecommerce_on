@@ -33,10 +33,10 @@ export default function OrderTracking() {
     try {
       setLoading(true);
       console.log("📡 Attempting to fetch real order from backend...");
-      console.log("🌐 Backend URL: http://localhost:5001/api/orders/${id}");
+      console.log("🌐 Backend URL: https://ecommerce-backend-ol0h.onrender.com/api/orders/${id}");
       
       // Try to fetch real order from backend
-      const response = await fetch(`http://localhost:5001/api/orders/${id}`, {
+      const response = await fetch(`https://ecommerce-backend-ol0h.onrender.com/api/orders/${id}`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }

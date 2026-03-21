@@ -50,7 +50,7 @@ export default function ProductDetail() {
     // Fetch reviews for this product
     const fetchReviews = async () => {
       try {
-        const res = await api.get(`http://localhost:5000/api/reviews/product/${id}`);
+        const res = await api.get(`https://ecommerce-backend-ol0h.onrender.com/api/reviews/product/${id}`);
         setReviews(res.data);
       } catch (err) {
         console.error(err);
@@ -90,7 +90,7 @@ export default function ProductDetail() {
     try {
       setSubmittingReview(true);
       await api.post(
-        `http://localhost:5000/api/reviews`,
+        `https://ecommerce-backend-ol0h.onrender.com/api/reviews`,
         {
           product_id: id,
           rating: reviewRating,
@@ -119,7 +119,7 @@ export default function ProductDetail() {
     if (!window.confirm("Are you sure you want to delete this review?")) return;
 
     try {
-      await api.delete(`http://localhost:5000/api/reviews/${reviewId}`, {
+      await api.delete(`https://ecommerce-backend-ol0h.onrender.com/api/reviews/${reviewId}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setReviews(reviews.filter(r => r.id !== reviewId));

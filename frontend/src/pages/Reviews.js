@@ -14,7 +14,7 @@ export default function Reviews() {
   // Fetch reviews by logged-in user
   const fetchReviews = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/reviews/user", {
+      const res = await axios.get("https://ecommerce-backend-ol0h.onrender.com/api/reviews/user", {
         headers: { Authorization: `Bearer ${token}` }, // Ensure token is sent
       });
       setReviews(res.data);
@@ -36,7 +36,7 @@ export default function Reviews() {
     if (!window.confirm("Are you sure you want to delete this review?")) return;
 
     try {
-      await axios.delete(`http://localhost:5000/api/reviews/${id}`, {
+      await axios.delete(`https://ecommerce-backend-ol0h.onrender.com/api/reviews/${id}`, {
         headers: { Authorization: `Bearer ${token}` }, // Fix: send token in headers
       });
       setReviews(reviews.filter((rev) => rev.id !== id));

@@ -38,7 +38,7 @@ export default function OrderConfirmation() {
 
         // Try to fetch real order from backend
         const token = localStorage.getItem("token");
-        const response = await fetch(`http://localhost:5001/api/orders/${id}`, {
+        const response = await fetch(`https://ecommerce-backend-ol0h.onrender.com/api/orders/${id}`, {
           headers: {
             "Authorization": `Bearer ${token}`
           }

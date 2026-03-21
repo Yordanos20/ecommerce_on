@@ -82,7 +82,7 @@ export default function ProductDetailNew() {
       try {
         console.log(`🔍 Fetching product with ID: ${id}`);
         
-        const response = await fetch(`http://localhost:5001/api/products/${id}`);
+        const response = await fetch(`https://ecommerce-backend-ol0h.onrender.com/api/products/${id}`);
         
         if (!response.ok) {
           throw new Error(`HTTP ${response.status}: ${response.statusText}`);
@@ -132,7 +132,7 @@ export default function ProductDetailNew() {
     // Fetch reviews for this product
     const fetchReviews = async () => {
       try {
-        const res = await fetch(`http://localhost:5000/api/reviews/product/${id}`);
+        const res = await fetch(`https://ecommerce-backend-ol0h.onrender.com/api/reviews/product/${id}`);
         const data = await res.json();
         setReviews(data);
       } catch (err) {
@@ -145,7 +145,7 @@ export default function ProductDetailNew() {
   // Fetch related products
   useEffect(() => {
     if (product) {
-      fetch("http://localhost:5000/api/products")
+      fetch("https://ecommerce-backend-ol0h.onrender.com/api/products")
         .then(res => res.json())
         .then(data => {
           const productsData = Array.isArray(data) ? data : (data.products || []);
@@ -186,7 +186,7 @@ export default function ProductDetailNew() {
 
     try {
       setSubmittingReview(true);
-      const response = await fetch("http://localhost:5000/api/reviews", {
+      const response = await fetch("https://ecommerce-backend-ol0h.onrender.com/api/reviews", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -33,7 +33,7 @@ export default function CustomerDashboardNew({ darkMode, setDarkMode }) {
     const fetchOrders = async () => {
       try {
         const token = localStorage.getItem("token");
-        const response = await fetch("http://localhost:5000/api/orders/customer", {
+        const response = await fetch("https://ecommerce-backend-ol0h.onrender.com/api/orders/customer", {
           headers: {
             "Authorization": `Bearer ${token}`
           }

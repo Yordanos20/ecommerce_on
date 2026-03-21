@@ -23,7 +23,7 @@ export default function CustomerDashboardWithDropdown({ darkMode, setDarkMode })
         const token = localStorage.getItem("token");
         
         // Fetch orders
-        const ordersResponse = await fetch("http://localhost:5000/api/orders/customer", {
+        const ordersResponse = await fetch("https://ecommerce-backend-ol0h.onrender.com/api/orders/customer", {
           headers: { "Authorization": `Bearer ${token}` }
         });
         if (ordersResponse.ok) {

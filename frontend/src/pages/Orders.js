@@ -15,13 +15,13 @@ export default function Orders() {
   useEffect(() => {
     const fetchOrders = async () => {
       console.log("🛒 Starting fetchOrders function...");
-      console.log("🌐 Backend URL: http://localhost:5001/api/orders/my-orders");
+      console.log("🌐 Backend URL: https://ecommerce-backend-ol0h.onrender.com/api/orders/my-orders");
       
       try {
         console.log("� Attempting to fetch from backend...");
         
         // Try to fetch real orders from backend
-        const res = await axios.get("http://localhost:5001/api/orders/my-orders", {
+        const res = await axios.get("https://ecommerce-backend-ol0h.onrender.com/api/orders/my-orders", {
           headers: { Authorization: `Bearer ${token}` },
         });
 
@@ -46,7 +46,7 @@ export default function Orders() {
         console.error(" Error details:", {
           status: error.response?.status,
           message: error.response?.data || error.message,
-          url: "http://localhost:5001/api/orders/my-orders"
+          url: "https://ecommerce-backend-ol0h.onrender.com/api/orders/my-orders"
         });
         
         // ONLY use mock data if backend is completely unavailable

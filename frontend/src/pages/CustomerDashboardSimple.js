@@ -25,7 +25,7 @@ export default function CustomerDashboardSimple({ darkMode, setDarkMode }) {
   const fetchDashboardData = async () => {
     try {
       const token = localStorage.getItem("token");
-      const response = await axios.get("http://localhost:5000/api/customer/dashboard", {
+      const response = await axios.get("https://ecommerce-backend-ol0h.onrender.com/api/customer/dashboard", {
         headers: { Authorization: `Bearer ${token}` }
       });
       setDashboardData(response.data);
@@ -83,7 +83,7 @@ export default function CustomerDashboardSimple({ darkMode, setDarkMode }) {
   const handleRemoveFromWishlist = async (productId) => {
     try {
       const token = localStorage.getItem("token");
-      await axios.delete(`http://localhost:5000/api/wishlist/${productId}`, {
+      await axios.delete(`https://ecommerce-backend-ol0h.onrender.com/api/wishlist/${productId}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       fetchDashboardData(); // Refresh data
@@ -95,7 +95,7 @@ export default function CustomerDashboardSimple({ darkMode, setDarkMode }) {
   const handleMarkNotificationRead = async (notificationId) => {
     try {
       const token = localStorage.getItem("token");
-      await axios.put(`http://localhost:5000/api/notifications/${notificationId}/read`, {}, {
+      await axios.put(`https://ecommerce-backend-ol0h.onrender.com/api/notifications/${notificationId}/read`, {}, {
         headers: { Authorization: `Bearer ${token}` }
       });
       fetchDashboardData(); // Refresh data

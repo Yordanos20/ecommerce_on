@@ -12,7 +12,7 @@ console.log('User:', user ? JSON.parse(user) : null);
 
 // Test API call if token exists
 if (token) {
-  fetch('http://localhost:5000/api/wishlist', {
+  fetch('https://ecommerce-backend-ol0h.onrender.com/api/wishlist', {
     headers: {
       'Authorization': `Bearer ${token}`
     }
