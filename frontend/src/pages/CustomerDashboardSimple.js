@@ -146,7 +146,7 @@ export default function CustomerDashboardSimple({ darkMode, setDarkMode }) {
   console.log('🏠 Customer Dashboard - loading:', loading);
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 pt-16">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       {/* Main Content - No duplicate header */}
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -161,22 +161,11 @@ export default function CustomerDashboardSimple({ darkMode, setDarkMode }) {
                 Here's what's happening with your orders and account
               </p>
             </div>
-            <div className="flex items-center space-x-4 mt-4 sm:mt-0">
-              <div className="relative cursor-pointer" onClick={() => setActiveSection('notifications')}>
-                <FiBell className="text-gray-600 dark:text-gray-300 text-xl hover:text-blue-600 transition-colors" />
-                {dashboardData.notifications.filter(n => !n.is_read).length > 0 && (
-                  <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">
-                    {dashboardData.notifications.filter(n => !n.is_read).length}
-                  </span>
-                )}
-              </div>
-              <button
-                onClick={handleLogout}
-                className="flex items-center space-x-2 text-gray-600 dark:text-gray-300 hover:text-red-600 transition-colors"
-              >
-                <FiLogOut />
-                <span className="hidden sm:inline">Logout</span>
-              </button>
+            <div className="text-right mt-4 sm:mt-0">
+              <p className="text-sm text-gray-500 dark:text-gray-400">Member since</p>
+              <p className="text-lg font-semibold text-gray-900 dark:text-white">
+                {user?.created_at ? formatDate(user.created_at) : 'Recent'}
+              </p>
             </div>
           </div>
         </div>
