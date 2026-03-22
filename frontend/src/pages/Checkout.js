@@ -89,7 +89,7 @@ export default function Checkout() {
           email: email,
           first_name: user?.name?.split(' ')[0] || 'Customer',
           last_name: user?.name?.split(' ')[1] || 'User',
-          callback_url: `http://localhost:3000/payment/verify`
+          callback_url: `https://myecommerce-liart.vercel.app/payment/verify`
         };
 
         console.log("💳 Initializing payment:", paymentData);
@@ -128,7 +128,7 @@ export default function Checkout() {
   // Check if backend is available
   const checkBackendAvailability = async () => {
     try {
-      const response = await fetch('http://localhost:5001/api/health');
+      const response = await fetch('https://ecommerce-backend-ol0h.onrender.com/api/health');
       return response.ok;
     } catch (error) {
       console.log("Backend not available:", error.message);
@@ -179,7 +179,7 @@ export default function Checkout() {
     localStorage.setItem('mockOrders', JSON.stringify(updatedMockOrders));
     
     // Redirect to mock Chapa payment page
-    const mockChapaUrl = `http://localhost:3000/mock-payment?order_id=${mockOrderId}&tx_ref=${mockTxRef}&amount=${totalPrice}&email=${encodeURIComponent(email)}`;
+    const mockChapaUrl = `https://myecommerce-liart.vercel.app/mock-payment?order_id=${mockOrderId}&tx_ref=${mockTxRef}&amount=${totalPrice}&email=${encodeURIComponent(email)}`;
     
     console.log("🔄 Redirecting to mock Chapa payment:", mockChapaUrl);
     console.log("📋 Mock order saved to localStorage:", mockOrderData);
