@@ -43,17 +43,8 @@ export default function Checkout() {
     setLoading(true);
 
     try {
-      // Check if backend is available first
-      const backendAvailable = await checkBackendAvailability();
-      
-      if (!backendAvailable) {
-        // FALLBACK: Create a mock order and show success
-        console.log("🔄 Backend not available, using fallback checkout");
-        await mockCheckout();
-        return;
-      }
-
-      // Step 1: Create the order first
+      // Step 1: Create the order first (try real checkout first)
+      console.log("� Attempting real checkout with backend...");
       const orderData = {
         items: cartItems.map((item) => ({
           product_id: item.id,
@@ -114,12 +105,9 @@ export default function Checkout() {
       console.error("❌ Error status:", err.response?.status);
       console.error("❌ Error data:", err.response?.data);
       
-      // FALLBACK: Use mock checkout if backend fails
-      console.log("🔄 Backend error, using fallback checkout");
-      await mockCheckout();
-      
-      const errorMessage = err.response?.data?.error || err.response?.data?.message || "Backend not available. Using offline checkout.";
-      toast.info(errorMessage);
+      // Show the actual error instead of falling back
+      const errorMessage = err.response?.data?.error || err.response?.data?.message || err.message || "Checkout failed. Please try again.";
+      toast.error(errorMessage);
     } finally {
       setLoading(false);
     }
