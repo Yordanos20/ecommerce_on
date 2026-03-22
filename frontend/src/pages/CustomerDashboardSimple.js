@@ -124,20 +124,22 @@ export default function CustomerDashboardSimple({ darkMode, setDarkMode }) {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
-      {/* Header */}
-      <div className="bg-white dark:bg-gray-800 shadow-sm sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-4">
-            <div className="flex items-center space-x-4">
-              <Link to="/" className="text-2xl font-bold text-blue-600 dark:text-blue-400">
-                ShopHub
-              </Link>
-              <h1 className="text-xl font-semibold text-gray-900 dark:text-white hidden sm:block">
-                My Dashboard
-              </h1>
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 pt-16">
+      {/* Main Content - No duplicate header */}
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Welcome Section */}
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6 mb-8">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
+                Welcome back, {user?.name}!
+              </h2>
+              <p className="text-gray-600 dark:text-gray-300 mt-1">
+                Here's what's happening with your orders and account
+              </p>
             </div>
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-4 mt-4 sm:mt-0">
               <div className="relative cursor-pointer" onClick={() => setActiveSection('notifications')}>
                 <FiBell className="text-gray-600 dark:text-gray-300 text-xl hover:text-blue-600 transition-colors" />
                 {dashboardData.notifications.filter(n => !n.is_read).length > 0 && (
@@ -153,28 +155,6 @@ export default function CustomerDashboardSimple({ darkMode, setDarkMode }) {
                 <FiLogOut />
                 <span className="hidden sm:inline">Logout</span>
               </button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Welcome Section */}
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6 mb-8">
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
-            <div>
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
-                Welcome back, {user?.name}!
-              </h2>
-              <p className="text-gray-600 dark:text-gray-300 mt-1">
-                Here's what's happening with your orders and account
-              </p>
-            </div>
-            <div className="text-right mt-4 sm:mt-0">
-              <p className="text-sm text-gray-500 dark:text-gray-400">Member since</p>
-              <p className="text-lg font-semibold text-gray-900 dark:text-white">
-                {user?.created_at ? formatDate(user.created_at) : 'Recent'}
-              </p>
             </div>
           </div>
         </div>
