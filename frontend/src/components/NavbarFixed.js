@@ -212,7 +212,7 @@ export default function NavbarFixed({ darkMode, setDarkMode }) {
                         )}
 
                         <Link
-                          to="/customer/notifications"
+                          to="/customer?section=notifications"
                           className="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-surface-700 transition-colors"
                         >
                           <FiBell size={16} />

@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import { FiShoppingBag, FiHeart, FiPackage, FiUser, FiLogOut, FiBell, FiMapPin, FiClock, FiDollarSign, FiEye, FiEdit, FiTrash2, FiChevronRight, FiGrid, FiList } from "react-icons/fi";
 import axios from "axios";
@@ -7,6 +7,7 @@ import axios from "axios";
 export default function CustomerDashboardSimple({ darkMode, setDarkMode }) {
   const { user, logout } = useContext(AuthContext);
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const [dashboardData, setDashboardData] = useState({
     stats: { total_orders: 0, total_spent: 0, pending_orders: 0, completed_orders: 0 },
     orders: [],
@@ -21,6 +22,14 @@ export default function CustomerDashboardSimple({ darkMode, setDarkMode }) {
   useEffect(() => {
     fetchDashboardData();
   }, []);
+
+  // Check for section parameter in URL
+  useEffect(() => {
+    const section = searchParams.get('section');
+    if (section && ['overview', 'orders', 'wishlist', 'addresses', 'notifications'].includes(section)) {
+      setActiveSection(section);
+    }
+  }, [searchParams]);
 
   const fetchDashboardData = async () => {
     try {
