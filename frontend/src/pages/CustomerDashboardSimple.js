@@ -16,8 +16,16 @@ export default function CustomerDashboardSimple({ darkMode, setDarkMode }) {
     wishlistItems: []
   });
   const [loading, setLoading] = useState(true);
-  const [activeSection, setActiveSection] = useState('overview');
   const [viewMode, setViewMode] = useState('grid');
+  
+  // Set initial active section from URL params
+  const getInitialSection = () => {
+    const section = searchParams.get('section');
+    return (section && ['overview', 'orders', 'wishlist', 'addresses', 'notifications'].includes(section)) 
+      ? section 
+      : 'overview';
+  };
+  const [activeSection, setActiveSection] = useState(getInitialSection());
 
   useEffect(() => {
     fetchDashboardData();
@@ -26,7 +34,9 @@ export default function CustomerDashboardSimple({ darkMode, setDarkMode }) {
   // Check for section parameter in URL
   useEffect(() => {
     const section = searchParams.get('section');
+    console.log('🔔 URL section param:', section);
     if (section && ['overview', 'orders', 'wishlist', 'addresses', 'notifications'].includes(section)) {
+      console.log('🔔 Setting active section to:', section);
       setActiveSection(section);
     }
   }, [searchParams]);
@@ -131,6 +141,9 @@ export default function CustomerDashboardSimple({ darkMode, setDarkMode }) {
       </div>
     );
   }
+
+  console.log('🏠 Customer Dashboard - activeSection:', activeSection);
+  console.log('🏠 Customer Dashboard - loading:', loading);
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 pt-16">
