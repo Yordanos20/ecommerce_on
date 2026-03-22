@@ -486,7 +486,7 @@ export default function CustomerDashboardSimple({ darkMode, setDarkMode }) {
                   <div key={item.id} className="border border-gray-200 dark:border-gray-700 rounded-lg p-4 hover:shadow-md transition-shadow">
                     <div className="relative">
                       <img
-                        src={item.image || 'https://via.placeholder.com/200x200'}
+                        src={item.image || 'https://images.unsplash.com/photo-1441986300917-64274b80c34f?w=200'}
                         alt={item.name}
                         className="w-full h-48 object-cover rounded-lg mb-4"
                       />
