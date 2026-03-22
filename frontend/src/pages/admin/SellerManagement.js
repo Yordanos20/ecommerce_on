@@ -26,7 +26,7 @@ const SellerManagement = () => {
           throw new Error('No authentication token found');
         }
 
-        const response = await axios.get('/api/admin/sellers', {
+        const response = await axios.get('https://ecommerce-backend-ol0h.onrender.com/api/admin/sellers', {
           headers: { Authorization: `Bearer ${token}` }
         });
 
@@ -132,7 +132,7 @@ const SellerManagement = () => {
     try {
       const token = localStorage.getItem('token');
 
-      await axios.put(`/api/admin/sellers/${currentSeller.id}/approval`, 
+      await axios.put(`https://ecommerce-backend-ol0h.onrender.com/api/admin/sellers/${currentSeller.id}/approval`, 
         { approval_status: 'Approved' },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -160,7 +160,7 @@ const SellerManagement = () => {
       const token = localStorage.getItem('token');
       const newStatus = currentSeller.status === 'suspended' ? 'Approved' : 'suspended';
 
-      await axios.put(`/api/admin/sellers/${currentSeller.id}/approval`, 
+      await axios.put(`https://ecommerce-backend-ol0h.onrender.com/api/admin/sellers/${currentSeller.id}/approval`, 
         { approval_status: newStatus },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -226,12 +226,12 @@ const SellerManagement = () => {
       const token = localStorage.getItem('token');
       const promises = selectedSellers.map(sellerId => {
         if (action === 'approve') {
-          return axios.put(`/api/admin/sellers/${sellerId}/approval`, 
+          return axios.put(`https://ecommerce-backend-ol0h.onrender.com/api/admin/sellers/${sellerId}/approval`, 
             { approval_status: 'Approved' },
             { headers: { Authorization: `Bearer ${token}` } }
           );
         } else if (action === 'reject') {
-          return axios.put(`/api/admin/sellers/${sellerId}/approval`, 
+          return axios.put(`https://ecommerce-backend-ol0h.onrender.com/api/admin/sellers/${sellerId}/approval`, 
             { approval_status: 'Rejected' },
             { headers: { Authorization: `Bearer ${token}` } }
           );
@@ -241,7 +241,7 @@ const SellerManagement = () => {
       await Promise.all(promises);
 
       // Refresh sellers list
-      const response = await axios.get('/api/admin/sellers', {
+      const response = await axios.get('https://ecommerce-backend-ol0h.onrender.com/api/admin/sellers', {
         headers: { Authorization: `Bearer ${token}` }
       });
 
@@ -308,7 +308,7 @@ const SellerManagement = () => {
     setError(null);
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get('/api/admin/sellers', {
+      const response = await axios.get('https://ecommerce-backend-ol0h.onrender.com/api/admin/sellers', {
         headers: { Authorization: `Bearer ${token}` }
       });
 

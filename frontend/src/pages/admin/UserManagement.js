@@ -24,7 +24,7 @@ const UserManagement = () => {
           throw new Error('No authentication token found');
         }
 
-        const response = await axios.get('/api/admin/users', {
+        const response = await axios.get('https://ecommerce-backend-ol0h.onrender.com/api/admin/users', {
           headers: { Authorization: `Bearer ${token}` }
         });
 

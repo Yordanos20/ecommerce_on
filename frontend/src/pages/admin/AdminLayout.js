@@ -93,7 +93,7 @@ const AdminLayout = ({ darkMode, setDarkMode }) => {
         if (!token) return;
 
         // Fetch real notifications from database
-        const response = await axios.get('/api/admin/notifications', {
+        const response = await axios.get('https://ecommerce-backend-ol0h.onrender.com/api/admin/notifications', {
           headers: { Authorization: `Bearer ${token}` }
         });
 
@@ -103,7 +103,7 @@ const AdminLayout = ({ darkMode, setDarkMode }) => {
           setUnreadCount(unread);
         } else {
           // Fallback to dashboard data if no dedicated notifications endpoint
-          const dashboardResponse = await axios.get('/api/admin/dashboard', {
+          const dashboardResponse = await axios.get('https://ecommerce-backend-ol0h.onrender.com/api/admin/dashboard', {
             headers: { Authorization: `Bearer ${token}` }
           });
 

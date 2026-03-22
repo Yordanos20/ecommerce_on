@@ -8,7 +8,7 @@ export default function AdminProducts() {
 
   const fetchProducts = async () => {
     try {
-      const response = await axios.get("/api/admin/products", {
+      const response = await axios.get("https://ecommerce-backend-ol0h.onrender.com/api/admin/products", {
         headers: { Authorization: `Bearer ${token}` },
       });
       const processedProducts = response.data.map(product => ({
@@ -36,7 +36,7 @@ export default function AdminProducts() {
 
   const removeProduct = async (id) => {
     try {
-      await axios.delete(`/api/admin/products/${id}`, {
+      await axios.delete(`https://ecommerce-backend-ol0h.onrender.com/api/admin/products/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       fetchProducts();

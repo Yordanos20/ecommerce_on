@@ -37,7 +37,7 @@ const AdminDashboardComplete = ({ darkMode, setDarkMode }) => {
         return;
       }
 
-      const response = await axios.get('/api/admin/dashboard', {
+      const response = await axios.get('https://ecommerce-backend-ol0h.onrender.com/api/admin/dashboard', {
         headers: { Authorization: `Bearer ${token}` }
       });
 
