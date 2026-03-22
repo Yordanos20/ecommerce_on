@@ -65,13 +65,17 @@ export default function Checkout() {
       };
 
       console.log("📋 Order data being sent:", orderData);
+      console.log("🔑 Token being used:", token);
+      console.log("👤 User info:", user);
 
       // Create order
       const orderRes = await api.post("/orders", orderData);
       console.log("✅ Order created:", orderRes);
+      console.log("📋 Order response data:", orderRes.data);
 
       if (orderRes.status === 201) {
         const orderId = orderRes.data.id;
+        console.log("🎯 Order ID extracted:", orderId);
         
         // Step 2: Initialize Chapa payment
         const paymentData = {
@@ -96,6 +100,8 @@ export default function Checkout() {
           toast.error("Payment initialization failed");
         }
       } else {
+        console.log("❌ Order creation failed with status:", orderRes.status);
+        console.log("❌ Order response message:", orderRes.data);
         toast.error(orderRes.data.message || "Order creation failed");
       }
     } catch (err) {
