@@ -55,7 +55,7 @@ router.post("/initialize", auth, async (req, res) => {
       );
 
       // Simulate Chapa checkout page redirect (in production, this would be real Chapa URL)
-      const mockChapaUrl = `http://localhost:3000/payment/verify?payment=success&tx_ref=${tx_ref}`;
+      const mockChapaUrl = `https://myecommerce-liart.vercel.app/payment/verify?payment=success&tx_ref=${tx_ref}`;
       
       return res.json({
         success: true,
@@ -73,8 +73,8 @@ router.post("/initialize", auth, async (req, res) => {
       first_name: first_name || req.user.name.split(' ')[0],
       last_name: last_name || req.user.name.split(' ')[1] || '',
       tx_ref: tx_ref,
-      callback_url: callback_url || `http://localhost:3000/payment/verify`,
-      return_url: `http://localhost:3000/orders/${orderId}`,
+      callback_url: callback_url || `https://myecommerce-liart.vercel.app/payment/verify`,
+      return_url: `https://myecommerce-liart.vercel.app/orders/${orderId}`,
       customization: {
         title: 'E-Commerce Payment',
         description: `Payment for order #${orderId}`
